@@ -1,0 +1,69 @@
+---
+title: "Presentation title (Update `r format(Sys.time(), '%d.%m.%Y')`)"
+author: "Cornelius Hennch"
+date: "`r format(Sys.time(), '%d.%m.%Y')`"
+output: 
+ powerpoint_presentation:
+  reference_doc: template.pptx
+  slide_level: 2
+  keep_md: false
+---
+
+```{r setup, include=FALSE}
+library(cowplot)
+library(gtsummary)
+library(kableExtra)
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE,
+                      message = FALSE,
+                      dev = "cairo_pdf",
+                      fig.width = 8, 
+                      fig.height = 8)
+```
+
+## Slide with multiple points
+
+1. Filter lesions > 10% prevalence
+2. Create crosstables for binary outcome variables (add p-/q-values)
+3. Logistic Regression
+
+## Two column example
+
+::::: {.columns}
+::: {.column}
+
+```{r message=FALSE, warning=FALSE}
+iris %>% head(10) %>% 
+  knitr::kable(caption = "Title", format = "latex", booktabs = T) %>%
+  kable_styling(latex_options = c("striped", "scale_down"), 
+                full_width = F) %>% 
+  column_spec(1, bold = T) %>%
+  as_image(zoom = 2, latex_header_includes = "\\setmainfont{Arial}") %>% 
+  knitr::include_graphics(dpi = 300)
+
+```
+
+::: 
+
+::: {.column}
+
+Wow, this is a nice table.
+
+:::
+:::::
+
+
+<!---
+
+## Column template
+::::: {.columns}
+::: {.column}
+
+:::
+
+::: {.column}
+
+:::
+:::::
+
+--->

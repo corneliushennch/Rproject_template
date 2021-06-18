@@ -1,0 +1,99 @@
+---
+title: "PMBCL survival analysis"
+author: "Cornelius Hennch"
+date: "`r format(Sys.time(), '%d.%m.%Y')`"
+output:
+  html_notebook:
+    style: markdown/style.css
+    theme: readable
+    number_sections: yes
+    toc_depth: 2
+    df_print: kable
+    highlight: pygments
+    fig_caption: yes
+  pdf_document:
+    dev: cairo_pdf
+    latex_engine: "xelatex"
+    keep_tex: yes
+    number_sections: yes
+    fig_crop: yes
+  html_document:
+    css: markdown/style.css
+    theme: readable
+    number_sections: yes
+    fig_caption: yes
+    df_print: kable
+    dev: "png"
+geometry: margin=1in
+mainfont: Georgia
+sansfont: PT Sans Caption
+fontsize: 11pt
+header-includes:
+  - \usepackage{longtable}
+  - \usepackage{booktabs}
+  - \LTcapwidth=.95\textwidth
+  - \linespread{1.05}
+  - \usepackage{hyperref}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
+  - \usepackage[normalem]{ulem}
+  - \usepackage{makecell}
+  - \usepackage{xcolor}
+
+---
+
+
+```{r knitr options, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE,
+                      root.dir = "/Users/cornelius/R_data/PMBL_datasets/PMBL_survival_analysis",
+                      dpi = 96,
+                      dev = "png",
+                      fig.width = 6,
+                      fig.height = 6,
+                      fig.align = "center",
+                      out.width = "80%")
+```
+
+
+```{r header and import, echo=FALSE, message=FALSE}
+
+# Packages & dependencies -------------------------------------------------------------------
+starttime <- Sys.time()
+# packages
+library(kableExtra)
+library(tidyverse)
+
+# today's date
+today <- format(Sys.Date(), "%Y%m%d")
+
+```
+
+# Cohort overview
+
+**Comment:** 
+I created this document to learn how to create Rmarkdown documents. I won't continue working with the Rmarkdown notebook document, as re-runs all the code, which makes it too time consuming at some point. My main take-aways from writing this script were the following:
+
+1. Setting the correct working directory for knitting is important and a little bit counter-intuitive (use `rmarkdown::render` rather than the Knit button). 
+2. If set-up correctly, the same document can be knit both to HTML and PDF (via Latex). 
+3. `{kable}` and `{kableExtra}` work for both output formats, if the stylings have been specified correctly for both outputs. It will even get more output format independent if tables are included by using `as_image()` or `save_kable()`. 
+4. I still haven't fully figured out how to include graphics a bit more intuitively. The output formats differ a little bit in their way how they include the graphics and thus how the size and scale turns out. Latex seems to process PDF graphics in a bit more intelligent way. HTML seems to handle PNG graphics better than PDFs...
+5. For now, I will continue by writing the analysis code in modular plain R scripts and using Rmarkdown just for compiling reports and presenations. I'll still have to figure out if I take the figures directly from the environment or print them already in the right size before including them.
+
+<!--- ![PMBCL cohort overview](../markdown/figures/PMBL_sample_flowchart.png) --->
+
+```{r chunk with plot}
+
+iris %>% 
+  ggplot(aes(x = Sepal.Length)) + geom_histogram(fill = "darkgreen") +
+  theme_classic()
+
+```
+
