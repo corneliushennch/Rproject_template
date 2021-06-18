@@ -67,11 +67,6 @@ if (render_reports) {
 
 }
 
-# misc/deprecated --------------------------------------------------------------
-# simulation of p-value distribution -------------------------------------------
-# source("src/6_simulate_pvalue_distribution.R")
-# -> not ready for smooth integration (and it would take quite long)
-
 # runtime
 runtime <- Sys.time() - starttime
 runtime
